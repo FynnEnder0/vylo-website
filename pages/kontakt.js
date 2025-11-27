@@ -20,6 +20,18 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  const handleSubmit = (e) => {
+    // Füge die richtige Weiterleitungs-URL vor dem Absenden hinzu
+    const form = e.target
+    const redirectInput = form.querySelector('input[name="_next"]')
+    if (redirectInput && typeof window !== 'undefined') {
+      const baseUrl = window.location.origin
+      redirectInput.value = `${baseUrl}/${locale === 'en' ? 'en/' : ''}danke`
+    }
+    // Lasse das Formular normal absenden
+    return true
+  }
+
   return (
     <Layout title={`${t.contact.title} – VYLO`}>
       <section className="py-20 bg-primary-800">
@@ -38,11 +50,14 @@ export default function Contact() {
             <form
               action="https://formsubmit.co/fylaender@gmail.com"
               method="POST"
+              onSubmit={handleSubmit}
               className="bg-primary-700 p-8 rounded-lg border border-accent-600/20"
             >
               <input type="hidden" name="_subject" value="Neue Kontaktanfrage von VYLO Website" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="box" />
+              <input type="hidden" name="_next" value="" />
+              <input type="hidden" name="_autoresponse" value="Vielen Dank für Ihre Anfrage! Wir melden uns innerhalb von 24 Stunden bei Ihnen. — VYLO Team" />
 
               <div className="space-y-6">
                 <div>
@@ -136,4 +151,3 @@ export default function Contact() {
     </Layout>
   )
 }
-
