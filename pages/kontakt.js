@@ -36,7 +36,7 @@ export default function Contact() {
             </p>
 
             <form
-              action="https://formsubmit.co/info@vylo.ai"
+              action="https://formsubmit.co/fylaender@gmail.com"
               method="POST"
               className="bg-primary-700 p-8 rounded-lg border border-accent-600/20"
             >
